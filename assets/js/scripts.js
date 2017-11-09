@@ -2,6 +2,7 @@ new Vue({
   el: '#app',
   data: {
     courseFilter: '',
+    filter: '',
     details: {
       dates: '2017-10-14 - 2017-10-15',
       category: 'Schooling Show',
@@ -145,5 +146,22 @@ new Vue({
         owner: 'Kristin Hardin'
       }
     ]
+  },
+  methods: {
+    filterCourses: function(course, filter) {
+      var found = false;
+      if(filter == ''){return true;}
+      this.results.forEach(function(result){
+        if(result.course == course){
+          if(result.entry.includes(filter)){console.log(result.entry + ":" + filter);found = true;}
+          else if(result.horse.includes(filter)){console.log(result.horse + ":" + filter);found = true;}
+          else if(result.rider.includes(filter)){console.log(result.rider + ":" + filter);found = true;}
+          else if(result.trainer.includes(filter)){console.log(result.trainer + ":" + filter);found = true;}
+          else if(result.owner.includes(filter)){console.log(result.owner + ":" + filter);found = true;}
+        }
+      });
+      if(found == false){console.log('no results');}
+      return found;
+    }
   }
 });

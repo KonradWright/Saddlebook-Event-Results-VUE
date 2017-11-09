@@ -4,38 +4,117 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First_Look</title>
+    <title>SB_Event_Show_Table</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-  <!-- Vue App -->
-  <div id="app">
-
-    <!-- Vue Table -->
-    <div class='table-responsive'>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users">
-            <td>{{ user.name }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="app">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-1" role="tab" data-toggle="tab">Results </a></li>
+            <li><a href="#tab-2" role="tab" data-toggle="tab">Details </a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" role="tabpanel" id="tab-1">
+                <div>
+                  <div v-show="courseFilter == ''">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Course</th>
+                            <th>Description</th>
+                            <th>Day</th>
+                            <th>Location</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="course in courses">
+                            <td><a v-on:click="courseFilter = course.course">{{ course.course }}</a></td>
+                            <td>{{ course.description }}</td>
+                            <td>{{ course.day }}</td>
+                            <td>{{ course.location }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div v-show="courseFilter != ''">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th><a v-on:click="courseFilter = ''">Course</a></th>
+                            <th>Place</th>
+                            <th>Entry</th>
+                            <th>Horse</th>
+                            <th>Rider</th>
+                            <th>Trainer</th>
+                            <th>Owner</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <template v-for="result in results">
+                            <tr v-if="result.course == courseFilter">
+                              <td>{{ result.course }}</td>
+                              <td>{{ result.place }}</td>
+                              <td>{{ result.entry }}</td>
+                              <td>{{ result.horse }}</td>
+                              <td>{{ result.rider }}</td>
+                              <td>{{ result.trainer }}</td>
+                              <td>{{ result.owner }}</td>
+                            </tr>
+                          </template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="tab-pane" role="tabpanel" id="tab-2">
+                <h1>Details </h1>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                      <span>
+                        Dates
+                        <p>{{ details.dates }}</p>
+                      </span>
+                    </li>
+                    <li class="list-group-item">
+                      <span>
+                        Event Category
+                        <p>{{ details.category }}</p>
+                      </span>
+                    </li>
+                    <li class="list-group-item">
+                      <span>
+                        Class Entries
+                      </span>
+                      <br>
+                      <template v-for="(date, index) in details.entries.days">
+                        {{ date.day }}: {{ date.number }}<template v-if="details.entries.days.length - 1 != index">,</template>
+                      </template>
+                      <br>
+                      <template v-for="(arena, index) in details.entries.arenas">
+                        {{ arena.arena }}: {{ arena.number }}<template v-if="details.entries.arenas.length - 1 != index">,</template>
+                      </template>
+                      <br>Total: {{ details.entries.total }}
+                      <br>Horses: {{ details.entries.horses }}
+                      <br>Riders: {{ details.entries.riders }}
+                    </li>
+                </ul>
+                <h1>Venue </h1>
+                <ul class="list-group">
+                    <li class="list-group-item"><span>{{ venue }}</span></li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-  </div>
-
-  <!-- Load additional scripts -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/vue.min.js"></script>
-  <script src="assets/js/main.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/vue.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 
 </html>

@@ -149,15 +149,15 @@ new Vue({
   },
   methods: {
     filterResults: function(result, filter) {
+      var filterLowercase = filter.toLowerCase();
       var found = false;
       if(filter == ''){return true;}
-      if(result.course.includes(filter)){console.log(result.course + ":" + filter);found = true;}
-      else if(result.entry.includes(filter)){console.log(result.entry + ":" + filter);found = true;}
-      else if(result.horse.includes(filter)){console.log(result.horse + ":" + filter);found = true;}
-      else if(result.rider.includes(filter)){console.log(result.rider + ":" + filter);found = true;}
-      else if(result.trainer.includes(filter)){console.log(result.trainer + ":" + filter);found = true;}
-      else if(result.owner.includes(filter)){console.log(result.owner + ":" + filter);found = true;}
-      if(found == false){console.log('no results');}
+      if(result.course.toLowerCase().includes(filterLowercase)){found = true;}
+      else if(result.entry.toLowerCase().includes(filterLowercase)){found = true;}
+      else if(result.horse.toLowerCase().includes(filterLowercase)){found = true;}
+      else if(result.rider.toLowerCase().includes(filterLowercase)){found = true;}
+      else if(result.trainer.toLowerCase().includes(filterLowercase)){found = true;}
+      else if(result.owner.toLowerCase().includes(filterLowercase)){found = true;}
       return found;
     }
   }

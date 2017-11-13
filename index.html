@@ -11,108 +11,37 @@
 
 <body>
     <div id="app">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab-1" role="tab" data-toggle="tab">Results </a></li>
-            <li><a href="#tab-2" role="tab" data-toggle="tab">Details </a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" role="tabpanel" id="tab-1">
-                <div>
-                  <input v-model="filter" type="text" style="width:100%;" placeholder="Search by Entry#, Horse, Rider, Trainer, or Owner...">
-                  <div v-show="courseFilter == ''">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Class</th>
-                            <th>Description</th>
-                            <th>Day</th>
-                            <th>Location</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <template v-for="course in courses">
-                            <tr v-if="filterCourses(course.course, filter)">
-                              <td><a v-on:click="courseFilter = course.course">{{ course.course }}</a></td>
-                              <td>{{ course.description }}</td>
-                              <td>{{ course.day }}</td>
-                              <td>{{ course.location }}</td>
-                            </tr>
-                          </template>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div v-show="courseFilter != ''">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th><a v-on:click="courseFilter = ''">Class</a></th>
-                            <th>Place</th>
-                            <th>Entry</th>
-                            <th>Horse</th>
-                            <th>Rider</th>
-                            <th>Trainer</th>
-                            <th>Owner</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <template v-for="result in results">
-                            <tr v-if="result.course == courseFilter">
-                              <td>{{ result.course }}</td>
-                              <td>{{ result.place }}</td>
-                              <td>{{ result.entry }}</td>
-                              <td>{{ result.horse }}</td>
-                              <td>{{ result.rider }}</td>
-                              <td>{{ result.trainer }}</td>
-                              <td>{{ result.owner }}</td>
-                            </tr>
-                          </template>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="tab-pane" role="tabpanel" id="tab-2">
-                <h1>Details </h1>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                      <span>
-                        Dates
-                        <p>{{ details.dates }}</p>
-                      </span>
-                    </li>
-                    <li class="list-group-item">
-                      <span>
-                        Event Category
-                        <p>{{ details.category }}</p>
-                      </span>
-                    </li>
-                    <li class="list-group-item">
-                      <span>
-                        Class Entries
-                      </span>
-                      <br>
-                      <template v-for="(date, index) in details.entries.days">
-                        {{ date.day }}: {{ date.number }}<template v-if="details.entries.days.length - 1 != index">,</template>
-                      </template>
-                      <br>
-                      <template v-for="(arena, index) in details.entries.arenas">
-                        {{ arena.arena }}: {{ arena.number }}<template v-if="details.entries.arenas.length - 1 != index">,</template>
-                      </template>
-                      <br>Total: {{ details.entries.total }}
-                      <br>Horses: {{ details.entries.horses }}
-                      <br>Riders: {{ details.entries.riders }}
-                    </li>
-                </ul>
-                <h1>Venue </h1>
-                <ul class="list-group">
-                    <li class="list-group-item"><span>{{ venue }}</span></li>
-                </ul>
-            </div>
+      <div>
+        <input v-model="filter" type="text" style="width:100%;" placeholder="Search by Class, Entry#, Horse, Rider, Trainer, or Owner...">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Place</th>
+                <th>Entry</th>
+                <th>Horse</th>
+                <th>Rider</th>
+                <th>Trainer</th>
+                <th>Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="result in results">
+                <tr v-if="filterResults(result, filter)">
+                  <td>{{ result.course }}</td>
+                  <td>{{ result.place }}</td>
+                  <td>{{ result.entry }}</td>
+                  <td>{{ result.horse }}</td>
+                  <td>{{ result.rider }}</td>
+                  <td>{{ result.trainer }}</td>
+                  <td>{{ result.owner }}</td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

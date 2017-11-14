@@ -5,14 +5,13 @@ new Vue({
   methods: {
     filterResults: function(result, filter) {
       var filterLowercase = filter.toLowerCase();
-      var found = false;
       if(filter == ''){return true;}
-      if(result.code.toLowerCase().includes(filterLowercase)){return true;}
-      else if(result.entry_no.toLowerCase().includes(filterLowercase)){return true;}
-      else if(result.horse_name.toLowerCase().includes(filterLowercase)){return true;}
-      else if(result.rider_name.toLowerCase().includes(filterLowercase)){return true;}
-      else if(result.trainer_name.toLowerCase().includes(filterLowercase)){return true;}
-      else if(result.owner_name.toLowerCase().includes(filterLowercase)){return true;}
+      if( result.code.toLowerCase().includes(filterLowercase)         ||
+          result.entry_no.toLowerCase().includes(filterLowercase)     ||
+          result.horse_name.toLowerCase().includes(filterLowercase)   ||
+          result.rider_name.toLowerCase().includes(filterLowercase)   ||
+          result.trainer_name.toLowerCase().includes(filterLowercase) ||
+          result.owner_name.toLowerCase().includes(filterLowercase)   ){return true;}
       return false;
     },
     toOrdinal: function (i) {
@@ -28,6 +27,22 @@ new Vue({
             return i + "rd";
         }
         return i + "th";
+    },
+    CountRows: function () {
+        var label = document.getElementById("countLabel");
+        var totalRowCount = 0;
+        var rowCount = 0;
+        var table = document.getElementById("entry_table_body");
+        var rows = table.getElementsByTagName("tr")
+        for (var i = 0; i < rows.length; i++) {
+            totalRowCount++;
+            if (rows[i].getElementsByTagName("td").length > 0) {
+                rowCount++;
+            }
+        }
+        var message = "Total Row Count: " + totalRowCount;
+        message += "\nRow Count: " + rowCount;
+        label.innerHTML = "You have " + totalRowCount + " rows.";
     }
   }
 });

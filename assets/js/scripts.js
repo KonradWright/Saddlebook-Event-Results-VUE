@@ -32,11 +32,11 @@ new Vue({
       return found;
     },
     clearInputFilter: function() {
-      var searchbar = $("#inputFilter");
-      var countLabel = $('#countLabel');
-      searchbar.innerHTML = '';
-      countLabel.innerHTML = '';
       this.filter = '';
+      var searchbar = $("#inputFilter");
+      searchbar.innerHTML = '';
+      var label = document.getElementById("countLabel");
+      label.innerHTML = "";
     },
     toOrdinal: function (i) {
         var j = i % 10,

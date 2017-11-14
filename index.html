@@ -29,12 +29,14 @@
             </thead>
             <tbody id="entry_table_body">
               <template v-for="course in courses">
-                <tr v-if="course.entry_courses.length > 1" style="background-color: #eee;">
-                  <td>{{ course.course.code }}</td>
-                  <td colspan="4">{{ course.course.title }}</td>
-                  <td>{{ course.course.course_date }}</td>
-                  <td>{{ course.course.arena }}</td>
-                </tr>
+                <template v-if="courseHasEntries(course)">
+                  <tr v-if="course.entry_courses.length > 1" style="background-color: #eee;">
+                    <td>{{ course.course.code }}</td>
+                    <td colspan="4">{{ course.course.title }}</td>
+                    <td>{{ course.course.course_date }}</td>
+                    <td>{{ course.course.arena }}</td>
+                  </tr>
+                </template>
                 <template v-for="entry in course.entry_courses">
                   <tr class="entry_table_entry_row" v-if="filterResults(entry, filter)">
                     <td></td>

@@ -14,6 +14,23 @@ new Vue({
           result.owner_name.toLowerCase().includes(filterLowercase)   ){return true;}
       return false;
     },
+    foobar: function() {
+      alert("foobar");
+    },
+    courseHasEntries: function(course) {
+      var found = false;
+      if(this.filter == ''){return true;}
+      var filterLowercase = this.filter.toLowerCase();
+      course.entry_courses.forEach(function(result){
+        if( result.code.toLowerCase().includes(filterLowercase)         ||
+            result.entry_no.toLowerCase().includes(filterLowercase)     ||
+            result.horse_name.toLowerCase().includes(filterLowercase)   ||
+            result.rider_name.toLowerCase().includes(filterLowercase)   ||
+            result.trainer_name.toLowerCase().includes(filterLowercase) ||
+            result.owner_name.toLowerCase().includes(filterLowercase)   ){found = true;}
+      });
+      return found;
+    },
     toOrdinal: function (i) {
         var j = i % 10,
             k = i % 100;

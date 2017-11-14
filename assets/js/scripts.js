@@ -33,7 +33,7 @@ new Vue({
         var totalRowCount = 0;
         var rowCount = 0;
         var table = document.getElementById("entry_table_body");
-        var rows = table.getElementsByTagName("tr")
+        var rows = table.getElementsByClassName("entry_table_entry_row");
         for (var i = 0; i < rows.length; i++) {
             totalRowCount++;
             if (rows[i].getElementsByTagName("td").length > 0) {

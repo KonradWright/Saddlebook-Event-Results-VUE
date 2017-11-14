@@ -12,7 +12,8 @@
 <body>
     <div id="app">
       <div>
-        <input v-model="filter" v-on:keyup="CountRows" type="text" style="width:100%;" placeholder="Search by Class, Entry#, Horse, Rider, Trainer, or Owner...">
+        <input id="inputFilter" v-model="filter" v-on:keyup="CountRows" type="text" style="width: 400px;" placeholder="Search by Class, Entry#, Horse, Rider, Trainer, or Owner...">
+        <button v-show="filter != ''" v-on:click="clearInputFilter">Clear</button>
         <p id="countLabel" style="width:100%; text-align: center;"></p>
         <div class="table-responsive">
           <table id="entry_table" class="table">

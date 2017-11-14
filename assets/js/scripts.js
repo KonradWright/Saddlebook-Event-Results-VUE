@@ -31,6 +31,13 @@ new Vue({
       });
       return found;
     },
+    clearInputFilter: function() {
+      var searchbar = $("#inputFilter");
+      var countLabel = $('#countLabel');
+      searchbar.innerHTML = '';
+      countLabel.innerHTML = '';
+      this.filter = '';
+    },
     toOrdinal: function (i) {
         var j = i % 10,
             k = i % 100;
